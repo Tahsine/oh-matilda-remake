@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+}
+
+/* Light theme (default) */
+:root,
+html[data-theme="light"] {
+  --page-bg: #e8e2d6;
+  --screen-bg: #f7f8f5;
+  --text-1: #1c211c;
+  --text-2: #6b7268;
+  --text-3: #767d78;
+  --user-bg: #dfe8de;
+  --card-bg: #ffffff;
+  --card-border: #e4e6e0;
+  --composer-bg: #ffffff;
+  --composer-border: #e2e5de;
+  --accent: #1e9e53;
+  --accent-soft: rgba(30, 158, 83, 0.13);
+  --mark-bg: rgba(30, 158, 83, 0.18);
+  --panel-bg: rgba(252, 252, 250, 0.94);
+  --panel-border: rgba(0, 0, 0, 0.09);
+  --hover: rgba(0, 0, 0, 0.055);
+  --key-bg: rgba(0, 0, 0, 0.09);
+  --shadow: 0 30px 70px rgba(40, 36, 26, 0.28);
+  --backdrop: rgba(60, 55, 40, 0.24);
+  --switch-bg: #d8dbd3;
+  --star: #e0a416;
+}
+
+/* Dark theme */
+html[data-theme="dark"] {
+  --page-bg: #0d0f0e;
+  --screen-bg: #1b1c1e;
+  --text-1: #e7e9e4;
+  --text-2: #a4aaa2;
+  --text-3: #8a918d;
+  --user-bg: #262a27;
+  --card-bg: #232527;
+  --card-border: #343734;
+  --composer-bg: #212325;
+  --composer-border: #35383a;
+  --accent: #5ad48b;
+  --accent-soft: rgba(90, 212, 139, 0.15);
+  --mark-bg: rgba(90, 212, 139, 0.22);
+  --panel-bg: rgba(24, 25, 27, 0.92);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --hover: rgba(255, 255, 255, 0.07);
+  --key-bg: rgba(255, 255, 255, 0.13);
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.75);
+  --backdrop: rgba(0, 0, 0, 0.55);
+  --switch-bg: #3a3d3f;
+  --star: #f2b53c;
+}
+
+html,
+body,
+#root {
+  min-height: 100dvh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--page-bg);
+  color: var(--text-1);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Hide scrollbars but keep scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Typing cursor */
+@keyframes caretBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.caret-blink {
+  animation: caretBlink 0.9s steps(2) infinite;
+}
+
+@keyframes spinClockwise {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-fast {
+  animation: spinClockwise 0.5s ease;
+}
