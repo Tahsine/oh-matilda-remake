@@ -1,8 +1,20 @@
 @import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
 
 @theme {
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+}
+
+/* Safe-area (edge-to-edge Android 15+) */
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
 }
 
 /* Light theme (default) */
@@ -59,18 +71,23 @@ html[data-theme="dark"] {
 html,
 body,
 #root {
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--page-bg);
+  background-color: var(--screen-bg);
   color: var(--text-1);
   transition: background-color 0.35s ease, color 0.35s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  touch-action: manipulation;
 }
 
 /* Hide scrollbars but keep scroll */

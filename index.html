@@ -3,12 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tauri + React + Typescript</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f8f5" />
+    <title>Oh-Matilda</title>
   </head>
 
   <body>
     <div id="root"></div>
+    <script>
+      // Safe-area : env() renvoie 0 dans la WebView Android.
+      // MainActivity.kt pousse les insets au layout, et le JS les réclame à chaque (re)chargement
+      // via SafeAreaBridge (addJavascriptInterface) pour survivre aux full reloads HMR.
+      window.__setSafeArea = function (t, r, b, l) {
+        window.__safeArea = { t: t, r: r, b: b, l: l };
+        var s = document.documentElement.style;
+        s.setProperty("--sat", t + "px");
+        s.setProperty("--sar", r + "px");
+        s.setProperty("--sab", b + "px");
+        s.setProperty("--sal", l + "px");
+      };
+      function requestNativeInsets() {
+        if (window.SafeAreaBridge) window.SafeAreaBridge.requestInsets();
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+          var a = window.__safeArea;
+          if (a) window.__setSafeArea(a.t, a.r, a.b, a.l);
+          requestNativeInsets();
+        });
+      } else {
+        requestNativeInsets();
+      }
+      window.addEventListener("load", requestNativeInsets);
+      document.addEventListener("visibilitychange", function () {
+        if (!document.hidden) requestNativeInsets();
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 // Scénarios — copie nettoyée de oh-matilda-—-ai-agent-chat/src/data/mockData.ts:145-628
 // Dépend de ./images.ts pour IMG_* et de ../lib/svg implicite (déjà inline dans images.ts)
 import type { Scenario, AutomationItem, ConversationHistoryItem } from "@/types";
-import { IMG_SANTORINI, IMG_WA_BEFORE, IMG_WA_AFTER, IMG_SETTINGS_OFF, IMG_SETTINGS_ON, IMG_DESK } from "./images";
+import { IMG_SANTORINI, IMG_WA_BEFORE, IMG_WA_AFTER, IMG_SETTINGS_OFF, IMG_SETTINGS_ON } from "./images";
 
 export const SCENARIOS: Record<string, Scenario> = {
   whatsapp_msg: {

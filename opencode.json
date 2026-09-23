@@ -1,0 +1,30 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "kaggle-remote/Qwen3.8-27B-GGUF",
+  "provider": {
+    "kaggle-remote": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Kaggle Remote Qwen (Thinking)",
+      "options": {
+        "baseURL": "https://airfare-camps-interpretation-opposed.trycloudflare.com/v1",
+        "apiKey": "dummy-key"
+      },
+      "models": {
+        "Qwen3.8-27B-GGUF": {
+          "name": "Qwen3.8-27B-UD_Q4_K_XL.gguf",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "extraBody": {
+              "chat_template_kwargs": {
+                "reasoning_effort": "xhigh"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
