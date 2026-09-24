@@ -306,10 +306,10 @@ export const MessageItem: React.FC<MessageItemProps> = ({
 
       {/* Actions Toolbar */}
       {!message.isStreaming && message.rawText && (
-        <div className="flex items-center gap-1 mt-2.5">
+        <div className="flex items-center gap-0.5 mt-2.5">
           <button
             onClick={handleCopy}
-            className="w-[34px] h-[34px] rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer"
+            className="w-11 h-11 rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer"
             style={{ color: 'var(--text-3)' }}
             title="Copy"
             aria-label="Copy message"
@@ -319,7 +319,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
 
           <button
             onClick={handleLike}
-            className={`w-[34px] h-[34px] rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer ${
+            className={`w-11 h-11 rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer ${
               liked ? 'active' : ''
             }`}
             style={{
@@ -333,7 +333,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
 
           <button
             onClick={handleDislike}
-            className={`w-[34px] h-[34px] rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer ${
+            className={`w-11 h-11 rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer ${
               disliked ? 'active' : ''
             }`}
             style={{
@@ -347,7 +347,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
 
           <button
             onClick={() => onRegenerate(message.id)}
-            className="w-[34px] h-[34px] rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer"
+            className="w-11 h-11 rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer"
             style={{ color: 'var(--text-3)' }}
             title="Regenerate"
             aria-label="Regenerate response"
@@ -357,7 +357,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
 
           <button
             onClick={() => onOpenFollowUp(message.scId)}
-            className="w-[34px] h-[34px] rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer"
+            className="w-11 h-11 rounded-[9px] flex items-center justify-center transition-colors active:bg-black/5 active:scale-95 cursor-pointer"
             style={{ color: 'var(--text-3)' }}
             title="Suggest follow-ups"
             aria-label="Suggest follow-ups"

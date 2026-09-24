@@ -149,7 +149,7 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
             e.stopPropagation();
             onToggleFav();
           }}
-          className="w-9 h-9 -m-1 rounded-[8px] flex items-center justify-center transition-colors cursor-pointer active:bg-black/5 relative z-10"
+          className="w-11 h-11 -m-1 rounded-[8px] flex items-center justify-center transition-colors cursor-pointer active:bg-black/5 relative z-10"
           style={{ color: conv.fav ? 'var(--star)' : 'var(--text-3)' }}
           aria-label={conv.fav ? 'Remove from favourites' : 'Add to favourites'}
         >
@@ -257,7 +257,7 @@ export const ConversationList: React.FC<ConversationListProps> = ({
                 {searchTerm && (
                   <button
                     onClick={() => setSearchTerm('')}
-                    className="text-[11px] font-semibold opacity-60 min-h-[40px] px-1 active:opacity-100"
+                    className="text-[11px] font-semibold opacity-60 min-h-[44px] px-2 active:opacity-100"
                   >
                     Clear
                   </button>

@@ -132,7 +132,7 @@ export const Composer: React.FC<ComposerProps> = ({
           <button
             id="btn-plus-options"
             onClick={onOpenSheet}
-            className="w-10 h-10 rounded-xl flex items-center justify-center transition-all active:bg-black/10 active:scale-90 cursor-pointer"
+            className="w-11 h-11 rounded-xl flex items-center justify-center transition-all active:bg-black/10 active:scale-90 cursor-pointer"
             style={{
               backgroundColor: 'var(--hover)',
               color: 'var(--text-2)',
@@ -145,7 +145,7 @@ export const Composer: React.FC<ComposerProps> = ({
           <button
             id="btn-send-or-voice"
             onClick={hasContent ? onSend : onStartVoice}
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 cursor-pointer ${
+            className={`w-11 h-11 rounded-full flex items-center justify-center transition-all active:scale-90 cursor-pointer ${
               hasContent ? 'shadow-md text-white' : ''
             }`}
             style={{

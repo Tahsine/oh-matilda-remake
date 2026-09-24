@@ -174,7 +174,10 @@ export const useChatStore = create<ChatState>()(
   toggleKebab: () => set((s) => ({ kebabOpen: !s.kebabOpen })),
   closeKebab: () => set({ kebabOpen: false }),
   openSheet: () => set({ sheetOpen: true }),
-  closeSheet: () => set({ sheetOpen: false }),
+  closeSheet: () => {
+    try { navigator.vibrate?.(15); } catch {}
+    set({ sheetOpen: false });
+  },
   openVoice: () => set({ voiceOpen: true }),
   closeVoice: () => set({ voiceOpen: false }),
   openAccess: () => set({ accessOpen: true }),
@@ -194,6 +197,7 @@ export const useChatStore = create<ChatState>()(
     get().showToast("Opening Android settings (simulated)");
     if (permTimer !== null) window.clearTimeout(permTimer);
     permTimer = window.setTimeout(() => {
+      try { navigator.vibrate?.(20); } catch {}
       set((s) => ({ perms: { ...s.perms, [key]: true } }));
       get().showToast(key === "a11y" ? "Accessibility granted" : "Screen capture granted");
     }, 550);
@@ -204,6 +208,7 @@ export const useChatStore = create<ChatState>()(
     const trimmed = (text ?? s.input).trim();
     const curAtt = att ?? s.attachments;
     if (!trimmed && !curAtt.photo && !curAtt.file) return;
+    try { navigator.vibrate?.(25); } catch {}
 
     let baseMessages = s.messages;
     let baseConvs = s.conversations;
@@ -384,6 +389,7 @@ export const useChatStore = create<ChatState>()(
 
   deleteConversation: (convId) => {
     clearStreamTimers();
+    try { navigator.vibrate?.(40); } catch {}
     const s = get();
     const fin = withPendingFinalized(s);
     const wasActive = s.activeConvId === convId;

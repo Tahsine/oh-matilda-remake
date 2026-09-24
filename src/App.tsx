@@ -62,6 +62,7 @@ function App() {
   const deleteConversation = useChatStore((s) => s.deleteConversation);
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const prevLenRef = useRef(0);
   const [showScrollBottom, setShowScrollBottom] = useState(false);
 
   useEffect(() => {
@@ -78,19 +79,56 @@ function App() {
     }
   }, [activeConvId, conversations, messages.length]);
 
-  useEffect(() => {
+  // Scroll helpers — FAB n'apparaît que si overflow réel et pas en bas
+  const updateFabVisibility = () => {
     const el = scrollRef.current;
     if (!el) return;
-    if (el.scrollHeight - el.scrollTop - el.clientHeight < 80) {
-      el.scrollTop = el.scrollHeight;
-    }
-  }, [messages]);
+    const hasOverflow = el.scrollHeight > el.clientHeight + 10;
+    const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+    setShowScrollBottom(hasOverflow && distanceFromBottom >= 80);
+  };
 
   const handleScroll = () => {
+    updateFabVisibility();
+  };
+
+  // Auto-scroll : force systématique sur nouveau message (même depuis le haut), streaming seulement si déjà en bas
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || messages.length === 0) {
+      prevLenRef.current = messages.length;
+      setShowScrollBottom(false);
+      return;
+    }
+    const isNewMessage = messages.length > prevLenRef.current;
+    // Laisser le DOM se mettre à jour (layout + tokens)
+    const doScroll = () => {
+      const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+      const isNearBottom = distanceFromBottom < 80;
+      const isOverflow = el.scrollHeight > el.clientHeight + 10;
+      if (isNewMessage) {
+        el.scrollTop = el.scrollHeight;
+        setShowScrollBottom(false);
+      } else if (isNearBottom) {
+        el.scrollTop = el.scrollHeight;
+        setShowScrollBottom(false);
+      } else {
+        setShowScrollBottom(isOverflow && distanceFromBottom >= 80);
+      }
+      prevLenRef.current = messages.length;
+    };
+    requestAnimationFrame(() => setTimeout(doScroll, 30));
+  }, [messages]);
+
+  // Initial + resize : masquer FAB si pas d'overflow
+  useEffect(() => {
+    updateFabVisibility();
     const el = scrollRef.current;
     if (!el) return;
-    setShowScrollBottom(el.scrollHeight - el.scrollTop - el.clientHeight >= 80);
-  };
+    const ro = new ResizeObserver(() => updateFabVisibility());
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const activeConv = conversations.find((c) => c.id === activeConvId);
 
@@ -139,9 +177,12 @@ function App() {
               transition={{ duration: 0.15 }}
               onClick={() => {
                 const el = scrollRef.current;
-                if (el) el.scrollTop = el.scrollHeight;
+                if (el) {
+                  el.scrollTop = el.scrollHeight;
+                  setShowScrollBottom(false);
+                }
               }}
-              className="absolute right-3.5 bottom-3.5 w-10 h-10 rounded-full border shadow-md flex items-center justify-center z-[15] active:scale-90"
+              className="absolute right-3.5 bottom-3.5 w-11 h-11 rounded-full border shadow-md flex items-center justify-center z-[15] active:scale-90"
               style={{
                 backgroundColor: "var(--card-bg)",
                 borderColor: "var(--card-border)",
