@@ -38,13 +38,6 @@ export interface ChatMessage {
   disliked?: boolean;
 }
 
-export interface AutomationItem {
-  id: string;
-  name: string;
-  sched: string;
-  on: boolean;
-}
-
 export interface ConversationHistoryItem {
   id: string;
   title: string;
